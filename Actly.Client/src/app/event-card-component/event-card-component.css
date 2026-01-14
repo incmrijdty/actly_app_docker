@@ -1,0 +1,68 @@
+.event-card {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.event-card h3 {
+  margin-bottom: 1rem;
+  color: #2c3e50;
+}
+
+.event-card p {
+  margin: 0.5rem 0;
+  color: #444;
+}
+
+.event-card strong {
+  color: #555;
+}
+
+button {
+  margin-top: 1rem;
+  margin-right: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+button[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.alert {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+.alert-warning {
+  background-color: #fff4e5;
+  border: 1px solid #ffd7a0;
+  color: #a86e00;
+}
+
+p[style*="color: green"] {
+  margin-top: 0.5rem;
+  font-weight: bold;
+}
+
+p[style*="color: red"] {
+  margin-top: 0.5rem;
+  font-weight: bold;
+}

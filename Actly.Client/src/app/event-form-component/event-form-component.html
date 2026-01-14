@@ -1,0 +1,18 @@
+<form [formGroup]="eventForm" (ngSubmit)="submit()">
+  <input formControlName="title" placeholder="Title" />
+  <textarea formControlName="description" placeholder="Description"></textarea>
+  
+  <div class="location-wrapper">
+    <input formControlName="location" placeholder="Location" autocomplete="off" />
+    <ul *ngIf="suggestions.length > 0" class="suggestions-list">
+      <li *ngFor="let suggestion of suggestions" (click)="selectSuggestion(suggestion)">
+        {{ suggestion.display_name }}
+      </li>
+    </ul>
+  </div>
+
+  <input type="datetime-local" formControlName="date" />
+  <input type="number" formControlName="maxParticipants" placeholder="Max Participants" />
+  <input formControlName="category" placeholder="Category" />
+  <button type="submit">{{ eventData ? 'Update' : 'Create' }}</button>
+</form>

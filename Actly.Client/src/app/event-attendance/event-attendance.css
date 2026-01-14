@@ -1,0 +1,51 @@
+h2 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  color: #2c3e50;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 1rem;
+}
+
+li {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+strong {
+  color: #555;
+  margin-left: 0.5rem;
+}
+
+button {
+  padding: 0.4rem 0.9rem;
+  background-color: #2ecc71;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-size: 0.9rem;
+  margin-left: 1rem;
+}
+
+button:hover {
+  background-color: #27ae60;
+}
+
+div[ngIf] {
+  font-style: italic;
+  color: #777;
+  margin-top: 0.5rem;
+}

@@ -1,0 +1,36 @@
+<div class="home-container">
+  <header class="header">
+    <h1>Welcome to Actly!</h1>
+    <div class="auth-buttons">
+      <button routerLink="/login" *ngIf="!isLoggedIn">Log In</button>
+      <button routerLink="/register" *ngIf="!isLoggedIn">Register</button>
+      <button routerLink="/volunteer-profile" *ngIf="isLoggedIn && userRole === 'Volunteer'">Your Profile</button>
+      <button routerLink="/organizer-profile" *ngIf="isLoggedIn && userRole === 'Organizer'">Organizer Profile</button>
+    </div>
+    <router-outlet></router-outlet>
+  </header>
+
+  <div class="filters">
+    <select [(ngModel)]="selectedCategory" (change)="applyFilters()">
+      <option value="">All Categories</option>
+      <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+    </select>
+
+    <input type="number" placeholder="Min participants" [(ngModel)]="minParticipants" (input)="applyFilters()" />
+    <input type="number" placeholder="Max participants" [(ngModel)]="maxParticipants" (input)="applyFilters()" />
+
+    <input type="date" [(ngModel)]="selectedDate" (change)="applyFilters()" />
+
+    <input type="text" placeholder="Location filter" [(ngModel)]="locationFilter" (input)="applyFilters()" />
+  </div>
+
+  <div *ngIf="loading">Loading events...</div>
+
+  <div class="event-list" *ngIf="!loading && filteredEvents.length">
+    <app-event-card *ngFor="let event of filteredEvents" [event]="event"></app-event-card>
+  </div>
+
+  <div *ngIf="!loading && !filteredEvents.length">
+    <p>No events available right now.</p>
+  </div>
+</div>

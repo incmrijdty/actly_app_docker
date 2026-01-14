@@ -1,0 +1,14 @@
+<h2>Participants</h2>
+
+<div *ngIf="participants.length === 0">No participants yet.</div>
+
+<ul>
+  <li *ngFor="let p of participants">
+    {{ p.username }} - Attended:
+    <strong>{{ p.attended ? 'Yes' : 'No' }}</strong>
+    <button (click)="toggleAttendance(p)">
+      Mark as {{ p.attended ? 'Not Attended' : 'Attended' }}
+    </button>
+  </li>
+</ul>
+

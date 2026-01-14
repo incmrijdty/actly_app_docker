@@ -1,0 +1,23 @@
+<div class="user-profile">
+  <h2>Welcome, {{ user?.username }}</h2>
+  <p>Your Email: {{ user?.email }}</p>
+  <p>Role: {{ user?.role }}</p>
+
+  <button (click)="logout()">Logout</button>
+
+  <h3>Upcoming Events</h3>
+    <div *ngIf="upcomingEvents.length > 0; else noUpcoming">
+        <app-event-card *ngFor="let event of upcomingEvents" [event]="event"></app-event-card>
+    </div>
+  <ng-template #noUpcoming>
+    <p>No upcoming events.</p>
+  </ng-template>
+
+  <h3>Attended Events</h3>
+  <div *ngIf="attendedEvents.length > 0; else noAttended">
+    <app-event-card *ngFor="let event of attendedEvents" [event]="event"></app-event-card>
+  </div>
+  <ng-template #noAttended>
+    <p>No attended events.</p>
+  </ng-template>
+</div>
