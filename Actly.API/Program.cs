@@ -76,8 +76,8 @@ builder.Services.AddCors(options =>
     options.AddDefaultPolicy(policy =>
     {
         policy.WithOrigins(
-            "http://localhost:4201",
-            "http://frontend"
+            "http://localhost:4201"
+ //           "http://frontend"
             ) 
               .AllowAnyHeader()
               .AllowAnyMethod();
@@ -102,7 +102,7 @@ else
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseRouting();
 
