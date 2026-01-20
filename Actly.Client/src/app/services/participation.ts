@@ -3,12 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { ParticipationDto } from '../models/participation';
 import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ParticipationService {
-  private apiUrl = 'http://localhost:5126/api/Participation';
+  private apiUrl = `${environment.apiUrl}/api/Participation`;
 
   constructor(private http: HttpClient) {}
 

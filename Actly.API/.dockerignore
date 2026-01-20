@@ -1,0 +1,8 @@
+bin
+obj
+.git
+.gitignore
+.vscode
+Dockerfile
+docker-compose.yaml
+README.md

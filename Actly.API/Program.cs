@@ -75,7 +75,10 @@ builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
     {
-        policy.WithOrigins("http://localhost:4200") 
+        policy.WithOrigins(
+            "http://localhost:4201",
+            "http://frontend"
+            ) 
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
@@ -109,5 +112,12 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    db.Database.Migrate();
+}
+
 
 app.Run();

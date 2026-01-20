@@ -81,12 +81,12 @@ export class EventFormComponent {
     if (this.eventData) {
       this.eventService.updateEvent(this.eventData.id, formValue).subscribe(() => {
         this.saved.emit();
-        this.cdr.detectChanges(); // optional, usually not needed
+        this.cdr.detectChanges(); 
       });
     } else {
       this.eventService.createEvent(formValue).subscribe(() => {
         this.saved.emit();
-        this.cdr.detectChanges(); // optional, usually not needed
+        this.cdr.detectChanges(); 
       });
     }
   }

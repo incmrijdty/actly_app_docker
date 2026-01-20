@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, tap } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
+import { environment } from '../environments/environment';
 
 
 @Injectable({
@@ -9,7 +10,7 @@ import { jwtDecode } from 'jwt-decode';
 })
 
 export class AuthService {
-  private apiUrl = 'http://localhost:5126/api/Auth';
+  private apiUrl = `${environment.apiUrl}/api/Auth`;
   private tokenKey = 'authToken';
   public isLoggedIn = new BehaviorSubject<boolean>(this.hasToken());
 

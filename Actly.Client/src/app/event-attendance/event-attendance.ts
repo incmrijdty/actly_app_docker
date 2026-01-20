@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, ChangeDetectorRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { environment } from '../environments/environment';
 @Component({
   selector: 'app-event-attendance',
   imports: [CommonModule],
@@ -22,7 +23,7 @@ export class EventAttendance implements OnInit {
   }
 
   fetchParticipants() {
-    this.http.get<any[]>(`http://localhost:5126/api/Events/${this.eventId}/participants`)
+    this.http.get<any[]>(`${environment.apiUrl}/api/Events/${this.eventId}/participants`)
       .subscribe(data => {
         console.log('Fetched participants:', data);
         this.participants = data;
@@ -34,7 +35,7 @@ export class EventAttendance implements OnInit {
 
   toggleAttendance(p: any) {
     const newStatus = !p.attended;
-    this.http.put(`http://localhost:5126/api/Participation/${p.id}/attendance`, newStatus).subscribe(() => {
+    this.http.put(`${environment.apiUrl}/api/Participation/${p.id}/attendance`, newStatus).subscribe(() => {
       p.attended = newStatus;
       this.cdr.detectChanges();
     });
