@@ -1,11 +1,11 @@
 services:
   postgres:
-    image: postgres:15
+    image: postgres:15-alpine
     container_name: actly_postgres
     environment:
-      POSTGRES_DB: volunteerdb
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: actly_app_mypassword
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
       - "5433:5432"
     volumes:
@@ -27,6 +27,10 @@ services:
       - "5127:8080"
     environment:
       ASPNETCORE_ENVIRONMENT: Development
+      JWT_KEY: ${JWT_KEY}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
 
   frontend:
     build:

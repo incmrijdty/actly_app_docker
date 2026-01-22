@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { EventCardComponent } from '../event-card-component/event-card-component';
 import { ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 interface JwtPayload {
   'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier': string;
@@ -16,7 +17,7 @@ interface JwtPayload {
 
 @Component({
   selector: 'app-user-profile',
-  imports: [CommonModule, EventCardComponent],
+  imports: [CommonModule, EventCardComponent, RouterModule],
   templateUrl: './user-profile.html',
   styleUrls: ['./user-profile.css']
 })

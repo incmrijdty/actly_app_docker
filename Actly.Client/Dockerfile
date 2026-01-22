@@ -1,10 +1,9 @@
 FROM node:20 AS build
 WORKDIR /app
 COPY package*.json ./
-RUN npm install
+RUN npm ci
 COPY . .
-RUN npm run build -- --output-path=dist \
-    && ls -la dist
+RUN npm run build -- --output-path=dist
 
 FROM nginx:alpine
 COPY --from=build /app/dist/browser /usr/share/nginx/html

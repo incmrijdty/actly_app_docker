@@ -46,14 +46,20 @@ builder.Services.AddControllers()
         options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
     });
 
+var connString = $"Host=postgres;Port=5432;Database={Environment.GetEnvironmentVariable("POSTGRES_DB")};Username={Environment.GetEnvironmentVariable("POSTGRES_USER")};Password={Environment.GetEnvironmentVariable("POSTGRES_PASSWORD")}";
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseNpgsql(connString));
+
+var jwtKey = Environment.GetEnvironmentVariable("JWT_KEY");
+if (string.IsNullOrEmpty(jwtKey))
+    throw new Exception("JWT_KEY environment variable not set");
+Console.WriteLine(jwtKey);
 
 builder.Services.AddAuthentication("Bearer")
     .AddJwtBearer("Bearer", options => 
     {
         var config = builder.Configuration;
-#pragma warning disable CS8604 // Possible null reference argument.
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
@@ -62,7 +68,7 @@ builder.Services.AddAuthentication("Bearer")
             ValidateIssuerSigningKey = true,
             ValidIssuer = config["Jwt:Issuer"],
             ValidAudience = config["Jwt:Audience"],
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jwt:Key"])),
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey)),
             RoleClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
         };
 #pragma warning restore CS8604 // Possible null reference argument.
@@ -77,7 +83,6 @@ builder.Services.AddCors(options =>
     {
         policy.WithOrigins(
             "http://localhost:4201"
- //           "http://frontend"
             ) 
               .AllowAnyHeader()
               .AllowAnyMethod();
@@ -101,8 +106,6 @@ else
     app.UseExceptionHandler("/Error");
     app.UseHsts();
 }
-
-//app.UseHttpsRedirection();
 
 app.UseRouting();
 

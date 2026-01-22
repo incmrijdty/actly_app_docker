@@ -61,9 +61,7 @@ public class AuthController : ControllerBase
 
     private string GenerateJwtToken(User user)
     {
-#pragma warning disable CS8604 // Possible null reference argument.
-        var key = Encoding.UTF8.GetBytes(_config["Jwt:Key"]);
-#pragma warning restore CS8604 // Possible null reference argument.
+        var jwtKey = Environment.GetEnvironmentVariable("JWT_KEY");
         var claims = new[]
         {
             new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
@@ -76,13 +74,15 @@ public class AuthController : ControllerBase
         if (string.IsNullOrEmpty(expiresValue))
             throw new Exception("Jwt:Expires is missing from configuration!");
 
+#pragma warning disable CS8604 // Possible null reference argument.
         var token = new JwtSecurityToken(
             issuer: _config["Jwt:Issuer"],
             audience: _config["Jwt:Audience"],
             claims: claims,
             expires: DateTime.UtcNow.AddMinutes(double.Parse(expiresValue)),
-            signingCredentials: new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256)
+            signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey)), SecurityAlgorithms.HmacSha256)
         );
+#pragma warning restore CS8604 // Possible null reference argument.
 
         return new JwtSecurityTokenHandler().WriteToken(token);
     }

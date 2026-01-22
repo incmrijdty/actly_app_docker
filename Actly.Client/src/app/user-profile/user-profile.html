@@ -1,8 +1,10 @@
 <div class="user-profile">
+  <button routerLink="/">Home</button>
+  
   <h2>Welcome, {{ user?.username }}</h2>
   <p>Your Email: {{ user?.email }}</p>
   <p>Role: {{ user?.role }}</p>
-
+  
   <button (click)="logout()">Logout</button>
 
   <h3>Upcoming Events</h3>
